@@ -3,3 +3,6 @@ I changed the [original](https://github.com/Megabyteceer/npp-task-list) NppTaskL
 
 ## Note:
 To compile you will need Visual Studio 2013.
+
+## To do:
+* Fix overriding other sidebar items
