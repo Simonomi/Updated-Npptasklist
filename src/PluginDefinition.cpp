@@ -145,6 +145,10 @@ bool setCommand(size_t index, TCHAR *cmdName, PFUNCPLUGINCMD pFunc, ShortcutKey 
 
 bool needRescanTodos = false;
 
+// SIMON ADDED THIS
+// a variable to keep track of if the sidebar is open
+bool dockopen = false;
+
 //find all tasks
 void findTasks()
 {
@@ -263,9 +267,11 @@ VOID CALLBACK MyTimerProc(
 	// if todos is empty, hide the sidebar
 	if (todos.size() == 0) {
 		_goToLine.display(false);
+		dockopen = false;
 	}
-	else {
+	else if(!dockopen) {
 		_goToLine.display();
+		dockopen = true;
 
 		// I spend like 2 hours on this one line and it's just that simple. I hate c++
 		::SetFocus(nppData._scintillaMainHandle);
@@ -372,4 +378,5 @@ void OpenTaskListDockableDlg()
 		::SendMessage(nppData._nppHandle, NPPM_DMMREGASDCKDLG, 0, (LPARAM)&data);
 	}
 	_goToLine.display();
+	dockopen = true;
 }
